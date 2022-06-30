@@ -4,7 +4,7 @@
 <head>
 
   <link rel="icon" type="image/x-icon" href="/img/logo-icon.png">
-  <title>App name: Coding Project By Ieti Lolo</title>
+  <title>Taco Cat: Coding Project By Ieti Lolo</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
   <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
       <img class="header-logo" src="./img/logo-icon-white-color-braces.png" height="30px" alt="" srcset="">
-      <a class="navbar-brand" href="index.html"> App name</a>
+      <a class="navbar-brand" href="index.html"> Taco Cat</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,22 +50,81 @@
   <!-- Main - content -->
   <main class="flex-shrink-0">
     <div class="container py-5 px-5 mt-5">
-      <h2 class="border-1 border-bottom border-dark">The Code for: App Name</h2>
+      <h2 class="border-1 border-bottom border-dark">The Code for Taco Cat</h2>
       <div class="row row-cols-1 row-cols-lg-2">
-        <div class="col">
+        <div class="col col-lg-8">
           <pre class="line-numbers">
             <code class="language-javascript">
-              // Call hello
-              function HelloWorld(){
-                alert("Hello, world!");
+              // Get word or phrase
+              function getValues(){
+                let word = document.querySelector("#word").value;
+
+                // Check if Palindrome
+                let result = isPalindrome(word);
+
+                // Display Result
+                displayResult(result, word);
+              }
+
+              // Check if Palindrome
+              function isPalindrome(word){
+                let wSanitised = word;
+                // Check if string
+                if ( typeof(word) == "string" ){
+                  // Make string lowercase
+                  wSanitised = wSanitised.toLowerCase();
+                  // Remove whitespacex
+                  wSanitised = wSanitised.replace(/\s/g, "");
+                  // Remove special characters
+                  wSanitised = wSanitised.replace(/[^a-zA-Z0-9 ]/g, '');
+                  let reversed = wSanitised.split("").reverse().join("");
+                  return reversed == wSanitised
+                } else {
+                  return false;
+                }
+              }
+
+              // Return Result
+              function displayResult(result, word){
+                if (result){
+                  document.querySelector("#results").innerHTML = `
+                  &lt;div class="alert alert-success" role="alert"&gt;The word/phrase ${word} is a Palindrome!&lt;/div&gt;`;
+                } else {
+                  document.querySelector("#results").innerHTML = `
+                  &lt;div class="alert alert-danger" role="alert"&gt;The word/phrase ${word} is not a Palindrome! A palindrome is a word, phrase, or sequence that reads the same backwards as forwards, e.g. madam or nurses run&lt;/div&gt;`;
+                }
               }
             </code>
           </pre>
         </div>
-        <div class="col">
-          <p>The Code is structured in one function.</p>
-          <h5>Hello, World!</h5>
-          <p>Hello world is a function that displays a message with "Hellow, World!"</p>
+        <div class="col col-lg-4">
+          <h5>Summary</h5>
+          <p>I use functions to encapsulate each section. Our program begins by listening for the click event on button
+            then calling <code>getValues()</code>. We first grab the word/phrase entered by user and
+            store to a variable.</p>
+
+          <p>We then pass our word/phrase as a argument through to our <code>isPalindrome()</code>
+            function. We then store the returned boolean in a variable and pass as a argument to the
+            <code>displayResults()</code> function.
+          </p>
+
+          <h5>Function explanation</h5>
+
+          <p><strong><code>isPalindrome()</code></strong> - Takes in a user provided word/phrase as a argument and then
+            sanitises it by running through a checklist:</p>
+
+          <ul>
+            <li>Must be type string</li>
+            <li>Make string lowercase</li>
+            <li>Remove all whitespace</li>
+            <li>Remove any characters that are not (a-z/A-Z/0-9)</li>
+          </ul>
+
+          <p>The word/phrase is then split into individual characters and reversed. The reversed string is then compared
+            to original word.</p>
+
+          <p><strong><code>displayResults()</code></strong> - This function simply checks result and displays either a
+            success or fail alert. The result and word/phrase is passed in as arguments.</p>
         </div>
       </div>
     </div>
